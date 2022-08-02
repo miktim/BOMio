@@ -7,19 +7,20 @@ package org.miktim.io;
 Overview:
 
   Class BomTable;
-    Build-in encoders: UTF-8, UTF-16BE, UTF-16LE
-    See https://en.wikipedia.org/wiki/Byte_order_mark
+    Build-in encoders: UTF-8, UTF-16BE(UTF-16), UTF-16LE, UTF-32BE(UTF-32), UTF-32LE
+    See: https://en.wikipedia.org/wiki/Byte_order_mark
+         https://docs.oracle.com/javase/8/docs/technotes/guides/intl/encoding.doc.html
 
     Methods:
       static void addBom(String charsetName, byte[] bomPrefix)
-      static String[] listEncoding(); 
+      static String[] listEncoders(); 
       
   Class BomStreamReader extends Reader;
     Constructor:
       BomStreamReader(InputStream in) throws IOException;
 
     Methods:
-      all methods inherited from Reader;
+      all methods inherited from java.io.Reader;
       String getEncoding();
 
   Class BomStreamWriter extends Writer;
@@ -27,7 +28,7 @@ Overview:
       BomStreamWriter(OutputStream out, String charsetName) throws IOException;
 
     Methods:
-      all methods inherited from Writer;
+      all methods inherited from java.io.Writer;
       String getEncoding();
 
       
@@ -37,8 +38,7 @@ Overview:
       BomFileReader(String fileName) throws IOException;
 
     Methods:
-      all methods inherited from Reader;
-      String getEncoding();
+      all methods inherited from BomStreamReader;
 
   Class BomFileWriter extends BomStreamWriter;
     Constructors:
@@ -46,8 +46,7 @@ Overview:
       BomFileWriter(String fileName, String charsetName) throws IOException;
 
     Methods:
-      all methods inherited from Writer;
-      String getEncoding();
+      all methods inherited from BomStreamWriter;
 
 Usage:
-  See BomTest.
+  See ./test/bomio/BomIoTest.java

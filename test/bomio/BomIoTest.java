@@ -18,7 +18,7 @@ public class BomIoTest {
 
     public static void main(String[] args) throws IOException {
         log("BOM IO Test");
-        log(Arrays.toString(BomTable.listEncoding()));
+        log(Arrays.toString(BomTable.listEncoders()));
         String fileName = "./BOMutf-8.txt";
         log("Read: " + fileName);
         BomFileReader br = new BomFileReader(fileName);
@@ -38,15 +38,21 @@ public class BomIoTest {
         cbuf = (new String(cbuf)).toCharArray();
         fileName = "./temp.txt";
         log("Write/Read: " + fileName);
-        BomFileWriter bw = new BomFileWriter(fileName, "UTF-16BE");
+        BomFileWriter bw = new BomFileWriter(fileName, "UTF-32LE");
         bw.write(cbuf);
         bw.flush();
         bw.close();
         br = new BomFileReader(fileName);
         log(br.getEncoding());
-        br.read(cbuf, 0, 128);
+        br.read(cbuf);
         log(new String(cbuf));
         br.close();
+        
+        bw = new BomFileWriter(fileName, "Utf-32Be");
+        bw.write(cbuf);
+        bw.flush();
+        bw.close();
+
         (new File(fileName)).delete();
     }
 }

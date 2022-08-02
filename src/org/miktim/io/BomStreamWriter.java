@@ -15,7 +15,7 @@ public class BomStreamWriter extends Writer {
 
     public BomStreamWriter(OutputStream out, String charsetName) throws UnsupportedEncodingException, IOException {
         super(out);
-        byte[] prefix = BomTable.bomTable.get(charsetName);
+        byte[] prefix = BomTable.encoderMap.get(charsetName);
         if (prefix == null) {
             throw new UnsupportedEncodingException();
         }

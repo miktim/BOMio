@@ -1,0 +1,4 @@
+The package was tested using JDK 8, JDK 11.
+
+BOMutf-8.txt, BOMutf-16.txt were created using the Kate editor.
+Both files must have the same content!

@@ -33,10 +33,10 @@ public class BomTable {
 
     static {
         addBom("UTF-8", new byte[]{(byte) 0xEF, (byte) 0xBB, (byte) 0xBF});
-        addBom("UTF-16", new byte[]{(byte) 0xFE, (byte) 0xFF});
+        addBom("UTF-16", new byte[]{}); //BE this is Java BOM stream writer!
         addBom("UTF-16BE", new byte[]{(byte) 0xFE, (byte) 0xFF});
         addBom("UTF-16LE", new byte[]{(byte) 0xFF, (byte) 0xFE});
-        addBom("UTF-32", new byte[]{(byte) 0x00, (byte) 0x00, (byte) 0xFE, (byte) 0xFF});
+        addBom("UTF-32",   new byte[]{(byte) 0x00, (byte) 0x00, (byte) 0xFE, (byte) 0xFF}); //BE
         addBom("UTF-32BE", new byte[]{(byte) 0x00, (byte) 0x00, (byte) 0xFE, (byte) 0xFF});
         addBom("UTF-32LE", new byte[]{(byte) 0xFF, (byte) 0xFE, (byte) 0x00, (byte) 0x00});
     }

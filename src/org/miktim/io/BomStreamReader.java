@@ -16,7 +16,8 @@ import java.util.List;
 public class BomStreamReader extends Reader {
 
     private InputStreamReader isr;
-
+    private String encoder = null;
+    
     public BomStreamReader(InputStream in) throws IOException {
         super(in);
         BufferedInputStream bin = new BufferedInputStream(in);
@@ -24,7 +25,6 @@ public class BomStreamReader extends Reader {
         if (bin.read(prefix, 0, prefix.length) != prefix.length) {
             throw new IOException();
         }
-        String encoder = null;
         List<byte[]> prefixList = new ArrayList(BomTable.prefixMap.keySet());
         for (byte[] bomPrefix : prefixList) {
             while (prefix.length < bomPrefix.length
@@ -47,6 +47,10 @@ public class BomStreamReader extends Reader {
         }
         isr = new InputStreamReader(bin, encoder);
 
+    }
+    
+    public String getEncoder() {
+        return encoder;
     }
 
     public String getEncoding() {

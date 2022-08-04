@@ -12,17 +12,23 @@ import java.io.Writer;
 public class BomStreamWriter extends Writer {
 
     private OutputStreamWriter osw;
-
+    private String encoder = null;
+    
     public BomStreamWriter(OutputStream out, String charsetName) throws UnsupportedEncodingException, IOException {
         super(out);
         byte[] prefix = BomTable.encoderMap.get(charsetName);
         if (prefix == null) {
             throw new UnsupportedEncodingException();
         }
+        encoder = BomTable.prefixMap.get(prefix);
         out.write(prefix);
         osw = new OutputStreamWriter(out, charsetName);
     }
 
+    public String getEncoder() {
+        return encoder;
+    }
+    
     public String getEncoding() {
         return osw.getEncoding();
     }

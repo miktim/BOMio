@@ -1,2 +1,2 @@
-﻿Шустрая рыжая лиса прыгает через ленивую собаку.
-Quick brown fox jumps over a lazy dog.
+﻿Шустрая бурая лисица прыгает через ленивого пса.
+The quick brown fox jumps over the lazy dog.

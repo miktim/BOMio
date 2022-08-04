@@ -1,4 +1,4 @@
-# Java SE 7+ Read/Write streams with Byte Order Mark (BOM). MIT (c) 2022 miktim@mail.ru
+# Java SE 7+ Byte Order Mark (BOM) Readers/Writers. MIT (c) 2022 miktim@mail.ru
 
 Release notes:
   See: https://en.wikipedia.org/wiki/Byte_order_mark
@@ -10,7 +10,7 @@ Overview:
 
   Class BomTable;
     Build-in encoders: UTF-8, UTF-16BE(UTF-16), UTF-16LE, UTF-32BE(UTF-32), UTF-32LE
-    Note: UTF-16 is Java BOM UTF-16BE output stream writer!
+    Note: Java UTF-16 output stream writer is in real the UTF-16BE BOM writer!
 
     Methods:
       static void addBom(String charsetName, byte[] bomPrefix)
@@ -23,6 +23,7 @@ Overview:
     Methods:
       all methods inherited from java.io.Reader;
       String getEncoding();
+      String getEncoder();
 
   Class BomStreamWriter extends Writer;
     Constructor:
@@ -31,6 +32,7 @@ Overview:
     Methods:
       all methods inherited from java.io.Writer;
       String getEncoding();
+      String getEncoder();
 
       
   Class BomFileReader extends BomStreamReader;

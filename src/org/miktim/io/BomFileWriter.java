@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class BomFileWriter extends BomStreamWriter {
+public class BomFileWriter extends BomOutputStreamWriter {
 
     public BomFileWriter(File file, String charsetName) throws IOException {
         super(new FileOutputStream(file), charsetName);

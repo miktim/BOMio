@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class BomFileReader extends BomStreamReader {
+public class BomFileReader extends BomInputStreamReader {
 
     public BomFileReader(File file) throws IOException {
         super(new FileInputStream(file));

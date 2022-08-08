@@ -9,33 +9,41 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
-public class BomStreamWriter extends Writer {
+public class BomOutputStreamWriter extends Writer {
 
     private OutputStreamWriter osw;
+    private OutputStream os;
     private String encoder = null;
-    
-    public BomStreamWriter(OutputStream out, String charsetName) throws UnsupportedEncodingException, IOException {
+    private byte[] prefix;
+
+    public BomOutputStreamWriter(OutputStream out, String charsetName) throws UnsupportedEncodingException, IOException {
         super(out);
-        byte[] prefix = BomTable.encoderMap.get(charsetName);
+        prefix = BomTable.encoderMap.get(charsetName);
         if (prefix == null) {
             throw new UnsupportedEncodingException();
         }
-        encoder = BomTable.prefixMap.get(prefix);
-        out.write(prefix);
+        os = out;
+        encoder = charsetName.toUpperCase();
+//        out.write(prefix);
         osw = new OutputStreamWriter(out, charsetName);
     }
 
     public String getEncoder() {
         return encoder;
     }
-    
+
     public String getEncoding() {
         return osw.getEncoding();
     }
 
     @Override
-    public void write(char[] chars, int i, int i1) throws IOException {
-        osw.write(chars, i, i1);
+    public void write(char[] chars, int offset, int length) throws IOException {
+        if (prefix != null && length > 0) {
+// behavior of Java BOM writers in case of "empty" streams        
+            os.write(prefix);
+            prefix = null;
+        }
+        osw.write(chars, offset, length);
     }
 
     @Override

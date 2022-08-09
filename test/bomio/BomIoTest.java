@@ -2,7 +2,7 @@
  * BOM io test. MIT (c) 2022 miktim@mail.ru
  * JDK 8 and higher required!
  */
-package bomio;
+//package bomio;
 
 import java.io.File;
 import java.io.FileInputStream;
